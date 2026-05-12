@@ -63,6 +63,8 @@ export const taskAPI = {
 export const bidAPI = {
   getBids: (taskId: number) => api.get(`/api/tasks/${taskId}/bids`),
 
+  getMyBids: () => api.get("/api/bids/my"),
+
   createBid: (taskId: number, data: { price: number; message: string }) =>
     api.post(`/api/tasks/${taskId}/bids`, data),
 
