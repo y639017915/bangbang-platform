@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { taskAPI } from "../api";
@@ -51,7 +50,7 @@ export default function Publish() {
         <div></div>
       </nav>
 
-      <form onSubmit={handleSubmit} className="form-container">
+      <form onSubmit={handleSubmit} className="publish-form">
         <div className="form-group">
           <label>任务标题 *</label>
           <input
@@ -123,12 +122,11 @@ export default function Publish() {
           />
         </div>
 
-        <div className="form-group">
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={formData.urgent}
-              onChange={(e) => setFormData({ ...formData, urgent: e.target.checked })}
+        <div className="urgent-toggle">
+          <label>
+            <div
+              className={`switch ${formData.urgent ? "active" : ""}`}
+              onClick={() => setFormData({ ...formData, urgent: !formData.urgent })}
             />
             <span>⚡ 加急任务（额外收取10%服务费）</span>
           </label>
@@ -136,178 +134,10 @@ export default function Publish() {
 
         {error && <div className="error-message">{error}</div>}
 
-        <button type="submit" className="btn-submit" disabled={loading}>
+        <button type="submit" className="submit-btn" disabled={loading}>
           {loading ? "发布中..." : "发布任务"}
         </button>
       </form>
-
-      <style>{`
-        .publish-page {
-          min-height: 100vh;
-          background: linear-gradient(180deg, #0F172A 0%, #1E1B4B 100%);
-        }
-
-        .navbar {
-          background: rgba(15, 23, 42, 0.9);
-          backdrop-filter: blur(20px);
-          padding: 1rem 5%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          position: sticky;
-          top: 0;
-          z-index: 100;
-        }
-
-        .back-btn {
-          background: transparent;
-          border: none;
-          color: white;
-          font-size: 1rem;
-          cursor: pointer;
-          padding: 0.5rem;
-        }
-
-        .navbar h1 {
-          font-size: 1.3rem;
-          background: linear-gradient(135deg, #6366F1, #8B5CF6);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .form-container {
-          max-width: 700px;
-          margin: 2rem auto;
-          padding: 0 5%;
-        }
-
-        .form-group {
-          margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-          display: block;
-          font-weight: 600;
-          margin-bottom: 0.6rem;
-          color: #E2E8F0;
-        }
-
-        .form-group input,
-        .form-group textarea {
-          width: 100%;
-          padding: 0.9rem 1rem;
-          background: rgba(30, 41, 59, 0.6);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
-          font-size: 1rem;
-          color: white;
-          font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-          outline: none;
-          border-color: #6366F1;
-        }
-
-        .form-group textarea {
-          min-height: 120px;
-          resize: vertical;
-        }
-
-        .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-        }
-
-        .category-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-          gap: 1rem;
-        }
-
-        .category-option {
-          background: rgba(30, 41, 59, 0.6);
-          border: 2px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
-          padding: 1.2rem;
-          cursor: pointer;
-          transition: all 0.3s;
-          text-align: center;
-        }
-
-        .category-option:hover {
-          border-color: rgba(99, 102, 241, 0.5);
-        }
-
-        .category-option.selected {
-          border-color: #6366F1;
-          background: rgba(99, 102, 241, 0.15);
-        }
-
-        .cat-icon {
-          font-size: 1.8rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .cat-desc {
-          font-size: 0.85rem;
-          color: #94A3B8;
-        }
-
-        .checkbox-label {
-          display: flex;
-          align-items: center;
-          gap: 0.8rem;
-          cursor: pointer;
-        }
-
-        .checkbox-label input {
-          width: 20px;
-          height: 20px;
-          accent-color: #6366F1;
-        }
-
-        .error-message {
-          background: rgba(239, 68, 68, 0.1);
-          border: 1px solid rgba(239, 68, 68, 0.3);
-          color: #EF4444;
-          padding: 0.8rem 1rem;
-          border-radius: 10px;
-          margin-bottom: 1rem;
-        }
-
-        .btn-submit {
-          width: 100%;
-          padding: 1rem;
-          background: linear-gradient(135deg, #6366F1, #8B5CF6);
-          color: white;
-          border: none;
-          border-radius: 12px;
-          font-size: 1rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s;
-        }
-
-        .btn-submit:hover:not(:disabled) {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-submit:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-
-        @media (max-width: 768px) {
-          .form-row {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
     </div>
   );
 }
-
