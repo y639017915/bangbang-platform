@@ -51,6 +51,7 @@ export default function Home() {
         <div className="nav-right">
           {currentUser ? (
             <>
+              <Link to="/messages" className="nav-icon-btn" title="消息">💬</Link>
               <Link to="/publish" className="btn btn-primary">发布任务</Link>
               <Link to="/profile" className="btn btn-outline">个人中心</Link>
               <button onClick={handleLogout} className="btn btn-outline">退出</button>

@@ -45,6 +45,18 @@ body {
 .nav-right {
   display: flex;
   gap: 0.8rem;
+  align-items: center;
+}
+
+.nav-icon-btn {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+
+.nav-icon-btn:hover {
+  transform: scale(1.1);
 }
 
 .btn {
